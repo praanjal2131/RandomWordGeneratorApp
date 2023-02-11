@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Random Word Generator App</title>
+  </head>
+  <body>
+    <div id="container">
+      <h1 id="header">Random Word Generator App</h1>
+      <div id="main">
+        <div id="current-word">
+          <p id="word">Click the "Next Word" button to generate a word</p>
+        </div>
+        <div id="controls">
+          <button id="next-word-button">Next Word</button>
+          <button id="favourite-word-button">Favourite Word</button>
+          <button id="delete button">delete</button>
+        </div>
+        <div id="history">
+          <h2>History</h2>
+          <ul id="word-history-list"></ul>
+        </div>
+      </div>
+      <div id="favourites">
+        <h2>Favourites</h2>
+        <ul id="favourite-word-list"></ul>
+      </div>
+    </div>
+    <script>
+      const words = [
+        "apple",
+        "banana",
+        "cherry",
+        "date",
+        "elderberry",
+        "fig"
+      ];
+      const nextWordButton = document.getElementById("next-word-button");
+      const favouriteWordButton = document.getElementById("favourite-word-button");
+      const currentWordElement = document.getElementById("word");
+      const historyListElement = document.getElementById("word-history-list");
+      const favouriteListElement = document.getElementById("favourite-word-list");
+      let currentWord = "";
+      let history = [];
+      let favourites = [];
+
+      nextWordButton.addEventListener("click", function() {
+        currentWord = words[Math.floor(Math.random() * words.length)];
+        currentWordElement.innerHTML = currentWord;
+        history.push(currentWord);
+        historyListElement.innerHTML = "";
+        history.forEach(function(word) {
+          const listItem = document.createElement("li");
+          listItem.innerHTML = word;
+          historyListElement.appendChild(listItem);
+        });
+      });
+
+      favouriteWordButton.addEventListener("click", function() {
+        favourites.push(currentWord);
+        favouriteListElement.innerHTML = "";
+        favourites.forEach(function(word) {
+          const listItem = document.createElement("li");
+          listItem.innerHTML = word;
+          favouriteListElement.appendChild(listItem);
+        });
+      });
+    </script>
+  </body>
+</html>
